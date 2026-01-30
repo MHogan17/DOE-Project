@@ -1,0 +1,15 @@
+# ------------------------------------------------------------------
+# my_dataset.yaml
+# ------------------------------------------------------------------
+path: ./train
+
+# Train/val image directories (relative to 'path')
+train: train/images
+val: test/images
+
+# --- Class definitions ---
+# Number of classes in your dataset
+nc: 4
+
+# Class names in the correct order (0=background, 1=person, etc.)
+names: ['lam1', 'lam3', 'lam5', 'nano'] 
