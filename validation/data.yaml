@@ -1,0 +1,8 @@
+nc: 2
+
+names:
+  0: lam1
+  1: lam3
+path: C:\Users\sovie\OneDrive - University of Utah\grad school\research\Super-Res\ML training (the Yolo Strikes back)\
+train: train
+val: validation
