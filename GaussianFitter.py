@@ -123,5 +123,5 @@ class GaussianFitter:
 # fitter = GaussianFitter(m=175.4, pixel_size=16)
 # fitter.fit('new beads/')
 
-fitter = GaussianFitter(m=175.4, pixel_size=16)
-fitter.fit('new beads/')
+# fitter = GaussianFitter(m=175.4, pixel_size=16)
+# fitter.fit('new beads/')

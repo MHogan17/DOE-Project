@@ -11,6 +11,9 @@ else:
         magnification = int(sys.argv[2])
         pixel_size = int(sys.argv[3])
 
+        # Add color classification here
+        # Store colored ROIs in ROIs.csv
+
         BlobDetectionSpherical.find_blobs(directory)
 
         fitter = GaussianFitter.GaussianFitter(magnification, pixel_size)

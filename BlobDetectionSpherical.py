@@ -91,20 +91,20 @@ def find_blobs(dirname):
 
         print(f"\rProgress: {round(i/n * 100, 3)}%", flush=True, end='')
         # Uncomment for plot
-        plt.imshow(r_final[i][10: -10, 10: -10])
-        plt.colorbar()
-        plt.show()
-
-        x0 = blobs_dog[:, 1]
-        y0 = blobs_dog[:, 0]
-        r0 = blobs_dog[:, 2]
-        fig = plt.figure()
-        ax = fig.add_subplot(1, 1, 1)
-        ax.imshow(r_final[i][10: -10, 10: -10])
-        for xc, yc, rc in zip(x0, y0, r0):
-            circ = plt.Circle((xc, yc), rc, fill=False, color='red')
-            ax.add_patch(circ)
-        plt.show()
+        # plt.imshow(r_final[i][10: -10, 10: -10])
+        # plt.colorbar()
+        # plt.show()
+        #
+        # x0 = blobs_dog[:, 1]
+        # y0 = blobs_dog[:, 0]
+        # r0 = blobs_dog[:, 2]
+        # fig = plt.figure()
+        # ax = fig.add_subplot(1, 1, 1)
+        # ax.imshow(r_final[i][10: -10, 10: -10])
+        # for xc, yc, rc in zip(x0, y0, r0):
+        #     circ = plt.Circle((xc, yc), rc, fill=False, color='red')
+        #     ax.add_patch(circ)
+        # plt.show()
 
 
     x = np.concatenate(x)
@@ -116,7 +116,7 @@ def find_blobs(dirname):
 
     np.savetxt(dirname + 'ROIs.csv', ROIlist, delimiter=',')
 
-find_blobs('new beads/')
+# find_blobs('new beads/')
 # with open(dirname + 'ROIs.csv') as f:
 #     ROIs = f.read()
 #     f.close()
