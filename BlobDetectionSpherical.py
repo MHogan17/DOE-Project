@@ -49,6 +49,10 @@ def uniform_large(frame):
 
 def find_blobs(dirname):
     n = len(os.listdir(dirname))  # number of frames
+    if 'ROIs.csv' in os.listdir(dirname):
+        n -= 1
+    if 'particles.csv' in os.listdir(dirname):
+        n -= 1
     final = []
     fnames = []
     count = 0

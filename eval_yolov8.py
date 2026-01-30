@@ -1,17 +1,8 @@
 import argparse
 from ultralytics import YOLO
 
-def evaluate_model(model_path, data_path, img_size, project_name, run_name):
-    """
-    Evaluates a trained YOLOv8 instance segmentation model.
+def evaluate_model(model_path, data_path, img_size=640, project_name='', run_name='evaluate'):
 
-    Args:
-        model_path (str): Path to the trained model weights (.pt file).
-        data_path (str): Path to the dataset's .yaml file.
-        img_size (int): Input image size for evaluation.
-        project_name (str): Name for the project directory.
-        run_name (str): Name for the specific evaluation run.
-    """
     print(f"🧠 Loading trained model from: {model_path}")
     # Load the trained model
     model = YOLO(model_path)

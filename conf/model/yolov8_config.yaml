@@ -1,15 +1,15 @@
 # ------------------------------------------------------------------
 # my_dataset.yaml
 # ------------------------------------------------------------------
-path: ./train
+path: C:\Users\Vutara\Desktop\DOE-Project\validation\
 
 # Train/val image directories (relative to 'path')
-train: train/images
-val: test/images
+train: images
+val: images
 
 # --- Class definitions ---
 # Number of classes in your dataset
-nc: 4
+nc: 2
 
 # Class names in the correct order (0=background, 1=person, etc.)
-names: ['lam1', 'lam3', 'lam5', 'nano'] 
+names: ['lam1', 'lam3']
