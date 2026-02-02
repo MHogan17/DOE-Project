@@ -44,7 +44,7 @@ def evaluate_model(model_path, data_path, img_size=640, project_name='', run_nam
     with open(csv_path, mode='w', newline='') as f:
         writer = csv.writer(f)
         # Header row
-        writer.writerow(['picture', 'x_center', 'y_center', 'confidence', 'classification_result'])
+        writer.writerow(['picture', 'x_center', 'y_center', 'width', 'height', 'confidence', 'classification_result'])
 
         for j in range(len(pngs)):
             result = model(source=img_directory+pngs[j])
@@ -52,6 +52,8 @@ def evaluate_model(model_path, data_path, img_size=640, project_name='', run_nam
                 for i in range(len(r.boxes.xywh)):
                     x = np.array(r.boxes.xywh[i][0])
                     y = np.array(r.boxes.xywh[i][1])
+                    width = np.array(r.boxes.xywh[i][2])
+                    height = np.array(r.boxes.xywh[i][3])
                     conf = np.array(r.boxes.conf[i])
                     cls = np.array(r.boxes.cls[i])
                     writer.writerow([j, x, y, conf, cls])

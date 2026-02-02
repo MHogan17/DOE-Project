@@ -15,7 +15,7 @@ else:
 
     # Add color classification here
     # Store colored ROIs in ROIs.csv
-    evaluate_model('mini_spec/train50/weights/best.pt', 'validation/data.yaml')
+    # evaluate_model('mini_spec/train50/weights/best.pt', 'validation/data.yaml')
 
     # BlobDetectionSpherical.find_blobs(directory)
     #

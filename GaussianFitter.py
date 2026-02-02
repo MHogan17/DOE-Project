@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import tifffile
+from PIL import Image
 from scipy.optimize import minimize
 from scipy import special
 import os
@@ -28,12 +29,12 @@ class GaussianFitter:
     def __init__(self, m, pixel_size):
         self.M = m
         self.pixel_size = pixel_size
-        self.K = 30 ** 2
+        self.K = 0
         self.params = [0, 0, 0, 0, 0]
-        self.x = np.linspace(0, 29, 30) * self.pixel_size / self.M
-        self.y = np.linspace(0, 29, 30)[:, None] * self.pixel_size / self.M
-        self.dx = self.x[1] - self.x[0]
-        self.dy = self.y[1] - self.y[0]
+        self.x = np.linspace(0,0,0)
+        self.y = np.linspace(0,0,0)
+        self.dx = 0
+        self.dy = 0
         return
 
     def gauss_model(self, x0, y0, s, N, B):
@@ -55,17 +56,18 @@ class GaussianFitter:
                self.params[4] / self.params[3] * (1 / self.K))
 
     def fit(self, dirname):
-        tifs = []
+        pngs = []
         for fname in sorted(os.listdir(dirname)):
-            if fname == 'ROIs.csv' or fname == 'particles.csv':
+            if fname == 'ROIs.csv' or fname == 'particles.csv' or fname=='readme.txt':
                 continue
-            tifs.append(tifffile.imread(dirname + fname))
+            png = np.array((Image.open(dirname + fname)))[:,:,0]
+            pngs.append(png)
 
         with open(dirname + 'ROIs.csv') as f:
             ROIs = f.read()
             f.close()
         #
-        ROIs = ROIs.split('\n')[0:-1]
+        ROIs = ROIs.split('\n')[1:-1]
         data = [['image', 'x0 (microns)', 'y0 (microns)', 'σ (microns)', 'N (count)', 'B (count)', 'R^2',
                  'CRLB_x0 (microns)']]
 
@@ -74,10 +76,18 @@ class GaussianFitter:
             idx = int(float(row[0]))
             x = int(float(row[1]))
             y = int(float(row[2]))
+            width = int(float(row[3]))
+            height = int(float(row[4]))
 
-            image = tifs[idx][y + 5:y + 35, x + 5:x + 35]
-            B = (np.mean(image[0:, 0]) + np.mean(image[0:, 29]) + np.mean(image[0, 1:28]) + + np.mean(
-                image[29, 1:28])) / 4
+            self.x = np.linspace(0, width - 1, width) * self.pixel_size / self.M
+            self.y = np.linspace(0, height - 1, height)[:, None] * self.pixel_size / self.M
+            self.dx = self.x[1] - self.x[0]
+            self.dy = self.y[1] - self.y[0]
+
+            image = pngs[idx][y:y+height, x:x+width]
+
+            B = (np.mean(image[0:, 0]) + np.mean(image[0:, width-1]) + np.mean(image[0, 1:width-2]) + + np.mean(
+                image[height-1, 1:width-2])) / 4
 
             image = image - np.ones_like(image) * B
 
