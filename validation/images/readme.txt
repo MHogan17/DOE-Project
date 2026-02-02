@@ -1,0 +1,11 @@
+0: lam3
+1: lam3
+2: lam3
+3: lam1
+4: lam1
+5: lam1
+6: lam1
+7: lam1/lam3
+8: lam1/lam3
+9: lam1/lam3
+10: lam1/lam3/lam5
