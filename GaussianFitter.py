@@ -68,7 +68,7 @@ class GaussianFitter:
             f.close()
         #
         ROIs = ROIs.split('\n')[1:-1]
-        data = [['image', 'x0 (microns)', 'y0 (microns)', 'σ (microns)', 'N (count)', 'B (count)', 'R^2',
+        data = [['image', 'x0 (microns)', 'y0 (microns)', 'σ (microns)', 'color', 'N (count)', 'B (count)', 'R^2',
                  'CRLB_x0 (microns)']]
 
         for row in ROIs:
@@ -82,6 +82,8 @@ class GaussianFitter:
             height = int(float(row[4]))
             if height % 2 == 1:
                 height -= 1
+
+            cls = int(float(row[6]))
 
 
             self.x = np.linspace(0, width - 1, width) * self.pixel_size / self.M
@@ -111,10 +113,10 @@ class GaussianFitter:
             s_tot = (image - mean) ** 2
             R2 = 1 - np.sum(s_res) / np.sum(s_tot)
 
-            fig, axes = plt.subplots(2, 1)
-            axes[0].imshow(image)
-            axes[1].imshow(model)
-            plt.show()
+            # fig, axes = plt.subplots(2, 1)
+            # axes[0].imshow(image)
+            # axes[1].imshow(model)
+            # plt.show()
 
             I_x0 = 0
             for i in self.x:
@@ -124,7 +126,9 @@ class GaussianFitter:
             I_x0 *= self.params[3]
             CRLB_x0 = np.sqrt(1/I_x0)
 
-            data_row = [int(idx), float(self.params[0]), float(self.params[1]), float(self.params[2]),
+            data_row = [int(idx), float((x + (self.params[0] * self.M / self.pixel_size) - width/2)),
+                        float((y + (self.params[1] * self.M / self.pixel_size) - height/2)),
+                        float(self.M / self.pixel_size * self.params[2]), cls,
                         float(self.params[3]), float(self.params[4]), float(R2), float(CRLB_x0[0])]
             print(data_row)
             data.append(data_row)

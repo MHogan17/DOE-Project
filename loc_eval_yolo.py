@@ -12,6 +12,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 def evaluate_model(model_path, data_path, img_size=640, project_name='', run_name='evaluate'):
+    img_directory = data_path
+    data_path = data_path + '../data.yaml'
+
     # 1. Load the trained model
     print(f"Loading trained model from: {model_path}")
     model = YOLO(model_path)
@@ -29,7 +32,6 @@ def evaluate_model(model_path, data_path, img_size=640, project_name='', run_nam
     )
     
     # Define the save path (using the directory YOLO just created)
-    img_directory = 'validation2/images/'
 
     csv_path = img_directory + "ROIs.csv"
 
