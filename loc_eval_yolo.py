@@ -29,7 +29,7 @@ def evaluate_model(model_path, data_path, img_size=640, project_name='', run_nam
     )
     
     # Define the save path (using the directory YOLO just created)
-    img_directory = 'validation/images/'
+    img_directory = 'validation2/images/'
 
     csv_path = img_directory + "ROIs.csv"
 
@@ -56,7 +56,7 @@ def evaluate_model(model_path, data_path, img_size=640, project_name='', run_nam
                     height = np.array(r.boxes.xywh[i][3])
                     conf = np.array(r.boxes.conf[i])
                     cls = np.array(r.boxes.cls[i])
-                    writer.writerow([j, x, y, conf, cls])
+                    writer.writerow([j, x, y, width, height, conf, cls])
 
     print(f"✅ Evaluation and CSV export complete!")
 

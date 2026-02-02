@@ -1,9 +1,8 @@
-nc: 3
+nc: 2
 
 names:
   0: lam1
   1: lam3
-  2: mixed
 path: C:\Users\Vutara\Desktop\DOE-Project\
 train: train
 val: validation2

@@ -77,14 +77,19 @@ class GaussianFitter:
             x = int(float(row[1]))
             y = int(float(row[2]))
             width = int(float(row[3]))
+            if width % 2 == 1:
+                width -= 1
             height = int(float(row[4]))
+            if height % 2 == 1:
+                height -= 1
+
 
             self.x = np.linspace(0, width - 1, width) * self.pixel_size / self.M
             self.y = np.linspace(0, height - 1, height)[:, None] * self.pixel_size / self.M
             self.dx = self.x[1] - self.x[0]
             self.dy = self.y[1] - self.y[0]
-
-            image = pngs[idx][y:y+height, x:x+width]
+            self.K = width * height
+            image = pngs[idx][y - int(height/2):y+int(height/2), x-int(width/2):x+int(width/2)]
 
             B = (np.mean(image[0:, 0]) + np.mean(image[0:, width-1]) + np.mean(image[0, 1:width-2]) + + np.mean(
                 image[height-1, 1:width-2])) / 4
