@@ -17,10 +17,10 @@ else:
     magnification = int(sys.argv[2])
     pixel_size = int(sys.argv[3])
 
-    # evaluate_model('mini_spec/train50/weights/best.pt', directory)
+    evaluate_model('mini_spec/train50/weights/best.pt', directory)
 
-    # fitter = GaussianFitter.GaussianFitter(magnification, pixel_size)
-    # fitter.fit(directory)
+    fitter = GaussianFitter.GaussianFitter(magnification, pixel_size)
+    fitter.fit(directory)
 
     pngs = []
     for fname in sorted(os.listdir(directory)):

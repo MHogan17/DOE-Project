@@ -22,8 +22,8 @@ def evaluate_model(model_path, data_path, img_size=640, project_name='', run_nam
     # 2. Run Standard Evaluation (for metrics)
     print(f"Evaluating model on dataset: {data_path}")
     metrics = model.val(
-        conf=0.05,
-        iou=0.6,
+        conf=0.95,
+        iou=0.1,
         data=data_path,
         imgsz=img_size,
         project=project_name,

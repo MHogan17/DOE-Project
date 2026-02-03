@@ -12,7 +12,7 @@ def evaluate_model(model_path, data_path, img_size=640, project_name='', run_nam
     # Evaluate the model on the validation set
     # The 'task' is automatically inferred from the model type
     metrics = model.val(
-        conf=0.05,
+        conf=0.3,
         iou=0.6,
         data=data_path,
         imgsz=img_size,
