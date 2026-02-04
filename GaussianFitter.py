@@ -129,7 +129,7 @@ class GaussianFitter:
             data_row = [int(idx), float((x + (self.params[0] * self.M / self.pixel_size) - width/2)),
                         float((y + (self.params[1] * self.M / self.pixel_size) - height/2)),
                         float(self.M / self.pixel_size * self.params[2]), cls,
-                        float(self.params[3]), float(self.params[4]), float(R2), float(CRLB_x0[0])]
+                        float(self.params[3]), float(self.params[4]), float(R2), float(CRLB_x0[0] * self.M / self.pixel_size)]
             print(data_row)
             data.append(data_row)
 
